@@ -9,10 +9,18 @@ module TwitterAuth
     include ActiveModel::Validations
 
     included do
+      attr_accessor :user_info
       validates_presence_of :uid, :token_key, :token_secret
+      validates_uniqueness_of :uid
     end
 
     module ClassMethods
+      def find_or_create_by_auth_hash(auth_hash)
+        u = self.find_or_initialize_by_uid(auth_hash[:uid])
+        u.token_key = auth_hash[:credentials][:token]
+        u.token_secret = auth_hash[:credentials][:secret]
+        u.save!
+      end
     end
     
     def method_missing(method, *args, &block)

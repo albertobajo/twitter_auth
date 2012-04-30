@@ -13,7 +13,7 @@ Spork.prefork do
   ENV["RAILS_ROOT"] ||= File.dirname(__FILE__) + "../../../spec/dummy"
 
   require 'cucumber/rails'
-
+  require "omniauth"
 
   # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
   # order to ease the transition to Capybara we set the default here. If you'd
@@ -21,6 +21,28 @@ Spork.prefork do
   # steps to use the XPath syntax.
   Capybara.default_selector = :css
 
+  # Omniauth test mode
+  OmniAuth.config.test_mode = true
+
+  # Omniauth mock_auth
+  json = File.read(Rails.root.join("../../lib/files/16789004997.json"))
+  raw_info = JSON.parse(json)
+  OmniAuth.config.mock_auth[:twitter] = {
+    provider: 'twitter',
+    uid:      '16789004997',
+    info: {
+      name:     'Matt Harris',
+      nickname: 'themattharris'
+    },
+    credentials: {
+      token:    '1234567890',
+      secret:   '12345678901234567890'
+    },
+    extra: {
+      raw_info: raw_info
+    }
+  }
+  
 end
  
 Spork.each_run do
@@ -68,5 +90,5 @@ Spork.each_run do
   # The :transaction strategy is faster, but might give you threading problems.
   # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
   Cucumber::Rails::Database.javascript_strategy = :truncation
-
+  
 end
