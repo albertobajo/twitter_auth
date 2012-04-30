@@ -19,6 +19,9 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.2.3"
 
   s.add_development_dependency "capybara"
+  s.add_development_dependency "cucumber-rails"
+  s.add_development_dependency "database_cleaner", "~> 0.7.2"
+  s.add_development_dependency "guard-cucumber"
   s.add_development_dependency "guard-rspec"
   s.add_development_dependency "guard-spork"
   s.add_development_dependency "rspec-rails"
