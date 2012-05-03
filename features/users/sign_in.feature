@@ -6,6 +6,8 @@ Feature: Sign in
   Scenario: Success
     When  I visit "/twitter_auth/session/new"
     Then  I should be on "/"
-    And   I should see "Matt Harris"
-    And   I should see "Going through and updating @twitterapi documentation"
-    And   I should see "themattharris"
+    And   I should see user info
+  
+  Scenario: Require user
+    When  I visit "/user"
+    Then  I should see user info

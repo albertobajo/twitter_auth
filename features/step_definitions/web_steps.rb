@@ -3,7 +3,7 @@ When /^I visit "([^"]*)"$/ do |path|
 end
 
 Then /^I should be on "([^"]*)"$/ do |path|
-  page.current_path == path
+  current_path.should eq(path)
 end
 
 Then /^I should see "([^"]*)"$/ do |text|

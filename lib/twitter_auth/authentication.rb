@@ -21,15 +21,15 @@ module TwitterAuth
     def require_user
       unless current_user.present?
         store_location
-        redirect_to "/twitter_user/twitter"
+        redirect_to "/twitter_auth/twitter"
       end
     end
 
     # Redirects to after_create_url if user is authenticated
     #
     # @example
-    #   before_filter :require_no_twitter_user
-    def require_no_twitter_user
+    #   before_filter :require_no_user
+    def require_no_user
       redirect_to after_create_url if current_user.present?
     end
 

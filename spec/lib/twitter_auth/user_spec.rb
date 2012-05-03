@@ -21,6 +21,10 @@ describe TwitterAuth::User do
     it { should respond_to(:token_secret) }
     it { should validate_presence_of(:token_secret) }
   end
+  
+  describe "user_info" do
+    it { should validate_presence_of(:user_info) }
+  end
     
   describe "user_info=" do
     it { should respond_to(:user_info=) }

@@ -24,11 +24,17 @@ describe TwitterAuth::SessionsController do
           request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
         end
         
-        context "existent user" do
-          let(:user) { create(:user, :matt) }
-          it "should authenticate given user" do
-            get :create
-            controller.current_user.should eq(user)
+        it "should authenticate given user" do
+          user = create(:user, :matt)
+          get :create
+          controller.current_user.should eq(user)
+        end
+        
+        context "new user" do
+          it "should create new user" do
+            expect {
+              get :create
+            }.should change(User, :count).by(1)
           end
         end
         
@@ -50,12 +56,5 @@ describe TwitterAuth::SessionsController do
       end
     end    
   end
-
-  # describe "GET 'new'" do
-  #   it "returns http success" do
-  #     get 'new'
-  #     response.should be_success
-  #   end
-  # end
 
 end
