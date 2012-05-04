@@ -8,6 +8,9 @@
 </head>
 <body>
 
+<%= link_to "Sign in", new_twitter_auth_session_path %>
+<%= link_to "Sign out", twitter_auth_session_path, method: :delete %>
+
 <%= yield %>
 
 </body>

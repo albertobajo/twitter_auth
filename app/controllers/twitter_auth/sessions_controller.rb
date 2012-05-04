@@ -12,6 +12,8 @@ class TwitterAuth::SessionsController < ApplicationController
   end
 
   def destroy
+    reset_session
+    redirect_to after_signout_path
   end
   
   protected

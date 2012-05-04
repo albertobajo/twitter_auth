@@ -67,6 +67,12 @@ module TwitterAuth
     def after_signin_path
       "/"
     end
+    
+    # Returns default path to redirect after sign out.
+    # It may be override on app's application controller.
+    def after_signout_path
+      "/"
+    end
 
     protected
 
