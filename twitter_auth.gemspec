@@ -16,12 +16,18 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
   s.add_dependency "hashie", "~> 1.2.0"
+  s.add_dependency "omniauth-twitter", "~> 0.0.8"
   s.add_dependency "rails", "~> 3.2.3"
 
   s.add_development_dependency "capybara"
+  s.add_development_dependency "cucumber-rails"
+  s.add_development_dependency "database_cleaner", "~> 0.7.2"
+  s.add_development_dependency "factory_girl_rails", "~> 3.2.0"
+  s.add_development_dependency "guard-cucumber"
   s.add_development_dependency "guard-rspec"
   s.add_development_dependency "guard-spork"
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "shoulda", "~> 3.0.1"
+  s.add_development_dependency "yard", "~> 0.8.1"
 end
