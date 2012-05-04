@@ -2,13 +2,19 @@ require 'spec_helper'
 
 describe TwitterAuth::SessionsController do
 
-  describe "GET 'new'" do
-    context "authenticated" do
-      it "should redirect to return_to" do
-        
-      end
+  describe "DELETE 'destroy'" do
+    it "should reset session" do
+      controller.should_receive(:reset_session).once
+      delete :destroy
     end
     
+    it "should redirect to after_signout_path" do
+      delete :destroy
+      response.should redirect_to("/")
+    end
+  end
+
+  describe "GET 'new'" do    
     context "unauthenticated" do
       it "should redirect to /twitter_auth/twitter" do
         get :new
