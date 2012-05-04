@@ -4,6 +4,8 @@ module TwitterAuth
 
     included do
       helper_method :current_user
+      hide_action :current_user, :require_user, :require_no_user,
+        :redirect_back_or, :sign_in, :signed_in?, :after_signin_path
     end
 
     # Finds user from session.
@@ -25,12 +27,12 @@ module TwitterAuth
       end
     end
 
-    # Redirects to after_create_url if user is authenticated
+    # Redirects to after_create_path if user is authenticated
     #
     # @example
     #   before_filter :require_no_user
     def require_no_user
-      redirect_to after_create_url if current_user.present?
+      redirect_to after_signin_path if current_user.present?
     end
 
     # Redirects to the url stored or url provided if no stored.
@@ -58,6 +60,12 @@ module TwitterAuth
     # Returns true if user is authenticated and returns false otherwise.
     def signed_in?
       session[:uid].present?
+    end
+    
+    # Returns default path to redirect after sign in.
+    # It may be override on app's application controller.
+    def after_signin_path
+      "/"
     end
 
     protected
